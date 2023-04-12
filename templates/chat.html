@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>E V A</title>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chatbox">
+        <ul id="conversation"></ul>
+        <input type="text" id="message">
+        <button id="send">Enviar</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#send').click(function() {
+                var message = $('#message').val();
+                $('#conversation').append('<li><span class="user">Tú: </span>' + message + '</li>');
+                $('#message').val('');
+
+                $.ajax({
+                    url: '/chatbot/',
+                    type: 'POST',
+                    data: { message: message },
+                    success: function(data) {
+                        var response = data.response;
+                        $('#conversation').append('<li><span class="bot">EVA: </span>' + response + '</li>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
