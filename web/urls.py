@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.hello),
     path('about/', views.about),
     path('chat/', views.chat),
+
 ]

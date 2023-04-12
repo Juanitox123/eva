@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+
     <title>E V A</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
                 $('#message').val('');
 
                 $.ajax({
-                    url: '/chatbot/',
+                    url: '/chat/',
                     type: 'POST',
                     data: { message: message },
                     success: function(data) {

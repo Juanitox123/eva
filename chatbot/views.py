@@ -12,8 +12,18 @@ def hello(request):
 def about(request):
     return HttpResponse("about")
 
+def obtener_respuesta(mensaje):
+    response = chatbot.get_response(mensaje)
+    return response.text
+
+@csrf_exempt
 def chat(request):
-    return render(request, 'chat.html')
+    if request.method == 'POST':
+        mensaje = request.POST.get('mensaje')
+        respuesta = obtener_respuesta(mensaje)
+        return render(request, 'chat.html', {'respuesta': respuesta, 'mensaje': mensaje})
+    else:
+        return render(request, 'chat.html')
 
 pares = [
         [
@@ -60,20 +70,3 @@ pares = [
 
 # Inicialización del chatbot
 chatbot = Chat(pares, reflections)
-
-# Función para obtener la respuesta de EVA
-def obtener_respuesta(message):
-    return chatbot.respond(message)
-
-# Vista para la página del chatbot
-def chat(request):
-    return render(request, 'chat.html')
-
-# Vista para procesar las solicitudes del chatbot
-@csrf_exempt
-def chatbot(request):
-    if request.method == 'POST':
-        message = request.POST.get('message')
-        response = obtener_respuesta(message)
-        data = {'response': response}
-        return JsonResponse(data)
