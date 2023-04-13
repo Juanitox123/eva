@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json, nltk
-from nltk.chat.util import Chat, reflections
+from nltk.chat.util import Chat, reflections 
+
 
 # Create your views here.
 
